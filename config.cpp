@@ -1,25 +1,33 @@
-#define MOD_DESCRIPTION 3DEN module that allows creators to initialize an infinite amount of ACE arsenals restricted by player role and other attributes.
-#define MOD_LOGO 		grra\data\grra.paa
-#define MOD_AUTHOR 		Grom
-#define MOD_NAME 	    Grom Restricted Arsenals
+#define GRRA_MOD_DESCRIPTION 3DEN module that allows creators to initialize an infinite amount of ACE arsenals restricted by player role and other attributes.
+#define GRRA_MOD_LOGO 		 grra\data\grra.paa
+#define GRRA_MOD_ICON        grra\data\grra_icon.paa
+#define GRRA_MOD_AUTHOR 	 Grom
+#define GRRA_MOD_NAME 	     Grom Restricted Arsenals
 
 // #define GRRA_DEBUG 1 // Debug functions from a mission file
+#ifdef GRRA_DEBUG
+    // running from mission folder
+    #define GRRA_FUNCTIONS_DIR functions
+#else
+    // running as mod
+    #define GRRA_FUNCTIONS_DIR \GRRA\functions
+#endif
 
 class CfgPatches
 {
 	class GRRA
 	{
-		name=MOD_NAME;
-		author=MOD_AUTHOR;
-		logo=MOD_LOGO;
-		logoOver=MOD_LOGO;
-		tooltip=MOD_DESCRIPTION;
-		tooltipOwned=MOD_DESCRIPTION;
-		picture=MOD_LOGO;
+		name=GRRA_MOD_NAME;
+		author=GRRA_MOD_AUTHOR;
+		logo=GRRA_MOD_LOGO;
+		logoOver=GRRA_MOD_LOGO;
+		tooltip=GRRA_MOD_DESCRIPTION;
+		tooltipOwned=GRRA_MOD_DESCRIPTION;
+		picture=GRRA_MOD_LOGO;
 		url="https://github.com/a3r0id";
 		units[] = {"GRRA_ModuleRoleRestrictedArsenal"};
 		requiredVersion = 1.0;
-		requiredAddons[] = {"A3_Modules_F"};
+		requiredAddons[] = {"A3_Modules_F", "3DEN"};
 	};
 };
 
@@ -28,7 +36,7 @@ class CfgFactionClasses
 	class NO_CATEGORY;
 	class GRRA_Modules: NO_CATEGORY
 	{
-		displayName = MOD_NAME;
+		displayName = GRRA_MOD_NAME;
 	};
 };
 
@@ -40,15 +48,14 @@ class CfgVehicles
 		class AttributesBase
 		{
 			class Default;
-			class Edit;					// Default edit box (i.e. text input field)
-			class Combo;				// Default combo box (i.e. drop-down menu)
-			class Checkbox;				// Default checkbox (returned value is Boolean)
-			class CheckboxNumber;		// Default checkbox (returned value is Number)
-			class ModuleDescription;	// Module description
-			class Units;				// Selection of units on which the module is applied
+			class Edit;				
+			class Combo;				
+			class Checkbox;				
+			class CheckboxNumber;		
+			class ModuleDescription;	
+			class Units;				
 		};
 
-		// Description base classes (for more information see below):
 		class ModuleDescription
 		{
 			class AnyBrain;
@@ -57,25 +64,20 @@ class CfgVehicles
 
 	class GRRA_ModuleRoleRestrictedArsenal: Module_F
 	{
-		// Standard object definitions:
-		scope = 2;										        // Editor visibility; 2 will show it in the menu, 1 will hide it.
-		displayName = "Restricted Arsenal";						// Name displayed in the menu
-		//icon = "\GRRA\data\icon_Nuke_ca.paa";	    			// Map icon. Delete this entry to use the default icon.
+		scope = 2;										       
+		displayName = "Restricted Arsenal";				
+		icon = GRRA_MOD_ICON;	    		
 		category = "GRRA_Modules";
+		function = "";                    						
+		functionPriority = 1;				                    
+		isGlobal = 1;						                   
+		isTriggerActivated = 1;				                   
+		isDisposable = 1;					                   
+		is3DEN = 1;							                   
+		curatorInfoType = "";                                
 
-		function = "";                    						// Name of function triggered once conditions are met
-		functionPriority = 1;				                    // Execution priority, modules with lower number are executed first. 0 is used when the attribute is undefined
-		isGlobal = 1;						                    // 0 for server only execution, 1 for global execution, 2 for persistent global execution
-		isTriggerActivated = 1;				                    // 1 for module waiting until all synced triggers are activated
-		isDisposable = 1;					                    // 1 if modules is to be disabled once it is activated (i.e. repeated trigger activation won't work)
-		is3DEN = 1;							                    // 1 to run init function in Eden Editor as well
-		curatorInfoType = "";                                   // Menu displayed when the module is placed or double-clicked on by Zeus
-
-		// Module attributes (uses https://community.bistudio.com/wiki/Eden_Editor:_Configuring_Attributes#Entity_Specific):
 		class Attributes: AttributesBase
 		{
-
-			// Module-specific arguments:
 			class Side: Combo
 			{
 				property = "GRRA_ModuleRoleRestrictedArsenal_Side";				// Unique property (use "<GRRA>_<moduleClass>_<attributeClass>" format to ensure that the name is unique)
@@ -126,34 +128,31 @@ class CfgVehicles
 
 	class GRRA_ModuleBaseArsenal: Module_F
 	{
-		// Standard object definitions:
-		scope = 2;										// Editor visibility; 2 will show it in the menu, 1 will hide it.
-		displayName = "Base Arsenal";				// Name displayed in the menu
-		//icon = "\GRRA\data\icon_Nuke_ca.paa";	// Map icon. Delete this entry to use the default icon.
+		scope = 2;									
+		displayName = "Base Arsenal";				
+		icon = GRRA_MOD_ICON;
 		category = "GRRA_Modules";
 
-		function = "";// Name of function triggered once conditions are met
-		functionPriority = 1;				// Execution priority, modules with lower number are executed first. 0 is used when the attribute is undefined
-		isGlobal = 1;						// 0 for server only execution, 1 for global execution, 2 for persistent global execution
-		isTriggerActivated = 1;				// 1 for module waiting until all synced triggers are activated
-		isDisposable = 1;					// 1 if modules is to be disabled once it is activated (i.e. repeated trigger activation won't work)
-		is3DEN = 1;							// 1 to run init function in Eden Editor as well
-		curatorInfoType = "";               // Menu displayed when the module is placed or double-clicked on by Zeus
+		function = "";
+		functionPriority = 1;				
+		isGlobal = 1;						
+		isTriggerActivated = 1;				
+		isDisposable = 1;					
+		is3DEN = 1;							
+		curatorInfoType = "";               
 
-		// Module attributes (uses https://community.bistudio.com/wiki/Eden_Editor:_Configuring_Attributes#Entity_Specific):
 		class Attributes: AttributesBase
 		{
 
 			// Module-specific arguments:
 			class Side: Combo
 			{
-				property = "GRRA_ModuleBaseArsenal_Side";				        // Unique property (use "<GRRA>_<moduleClass>_<attributeClass>" format to ensure that the name is unique)
-				displayName = "Side";			                                // Argument label
-				tooltip = "Side that has access to the base arsenal.";	        // Tooltip description
-				typeName = "NUMBER";							                // Value type, can be "NUMBER", "STRING" or "BOOL"
-				defaultValue = "0";							                    // Default attribute value. Warning: This is an expression, and its returned value will be used (50 in this case).
+				property = "GRRA_ModuleBaseArsenal_Side";				       
+				displayName = "Side";			                                
+				tooltip = "Side that has access to the base arsenal.";	        
+				typeName = "NUMBER";							               
+				defaultValue = "0";							                    
 
-				// Listbox items:
 				class Values
 				{
 					class opt0	{ name = "ALL";	        value = 0; };
@@ -169,8 +168,7 @@ class CfgVehicles
                 property = "GRRA_ModuleBaseArsenal_Owner";	
                 displayName = "Owner";
                 tooltip = "Variable or classname of the arsenal object.";
-                // Default text for the input box:
-                defaultValue = """"""; // Because this is an expression, one must have a string within a string to return a string
+                defaultValue = """""";
             };
 
 			class Items: Edit
@@ -178,16 +176,51 @@ class CfgVehicles
                 property = "GRRA_ModuleBaseArsenal_Items";
 				displayName = "Items";
 				tooltip = "Array/comma-seperated values of items included in the base arsenal.";
-				// Default text for the input box:
-				defaultValue = """[]"""; // Because this is an expression, one must have a string within a string to return a string
+				defaultValue = """[]""";
 			};            
 		};
 	};    
+
+	class GRRA_AceArsenalOverride: Module_F
+	{
+		scope = 2;							    
+		displayName = "Force Vanilla Arsenal";	
+		icon = GRRA_MOD_ICON;			
+		category = "GRRA_Modules";				
+		function = "";							
+		functionPriority = 1;					
+		isGlobal = 1;							
+		isTriggerActivated = 1;					
+		isDisposable = 1;						
+		is3DEN = 1;						
+		curatorInfoType = "";               	
+		class Attributes: AttributesBase {};
+	};    	
 };
 
-#undef MOD_DESCRIPTION
-#undef MOD_LOGO
-#undef MOD_AUTHOR
-#undef MOD_NAME
-
 #include "CfgFunctions.hpp"
+
+class ctrlMenuStrip;
+class display3DEN
+{
+	class Controls
+	{
+		class MenuStrip: ctrlMenuStrip
+		{
+			class Items
+			{
+				class Tools
+				{
+					items[] += {"GRRA_ArsenalEditor"};
+				};
+				class GRRA_ArsenalEditor
+				{
+					text    = "Arsenal Formatter";
+					picture = GRRA_MOD_ICON;
+					action  = "[] call GRRA_fnc_formatter;";
+                    opensNewWindow = 1;
+				};
+			};
+		};
+	};
+};

@@ -1,2 +1,2 @@
-#define GRRA_DEBUG 1;
+#define GRRA_DEBUG 1
 #include "config.cpp"

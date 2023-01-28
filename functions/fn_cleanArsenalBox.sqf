@@ -1,7 +1,7 @@
 /*
 	File: fn_cleanArsenalBox.sqf
 	Author: Grom -> https://github.com/a3r0id
-	Usage: [_arsenalBox] call GRRA_fnc_cleanArsenalBox -> nil
+	Usage: [_arsenalBox] call GRRA_fnc_cleanArsenalBox;
 */
 
 params ["_arsenalBox"];

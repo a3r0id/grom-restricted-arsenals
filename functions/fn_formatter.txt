@@ -1,0 +1,7 @@
+/*
+	File: formatter.sqf
+	Author: Grom -> https://github.com/a3r0id
+	Description: 
+		- Defines, Opens and runs the arsenal formatter.
+		- Works both in-game as well as in 3den editor.
+*/
