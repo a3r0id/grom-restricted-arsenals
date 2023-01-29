@@ -6,7 +6,7 @@
 
 if (isServer && !hasInterface) exitWith {};
 
-systemChat format ["GRRA: %1", "Initializing player"];
+//systemChat format ["GRRA: %1", "Initializing player"];
 
 GRRA_USE_VANILLA_ARSENAL = false;
 
@@ -71,7 +71,7 @@ _fnc_createOrAddArsenal = {
 		"init",
 		{   
 			_thisClass = typeOf (_this select 0);
-			//[_this select 0] call GRRA_fnc_cleanArsenalBox;
+			[_this select 0] call GRRA_fnc_cleanArsenalBox;
 			if (GRRA_USE_VANILLA_ARSENAL) then {
 				[_this select 0, GRRA_CLASSES_MAP get _thisClass] call GRRA_fnc_addItemsVanillaArsenal;
 			} else {
@@ -87,7 +87,7 @@ _fnc_createOrAddArsenal = {
 // Arsenals to be attached to a specific variable
 {	
 	_arsenalBox = missionNamespace getVariable _x;
-	//[missionNamespace getVariable _x] call GRRA_fnc_cleanArsenalBox;
+	[missionNamespace getVariable _x] call GRRA_fnc_cleanArsenalBox;
 	if (GRRA_USE_VANILLA_ARSENAL) then {
 		[_arsenalBox, GRRA_VARS_MAP get _x] call GRRA_fnc_addItemsVanillaArsenal;
 	} else {

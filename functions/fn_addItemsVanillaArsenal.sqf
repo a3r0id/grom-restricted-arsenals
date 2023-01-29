@@ -19,8 +19,8 @@ private _binocularClasses 	= [];
 		_backpackClasses pushBack _x;
 		continue;
 	};
-
-	// https://github.com/acemod/ACE3/blob/76676eee462cb0bbe400a482561c148d8652b550/addons/common/functions/fnc_getItemType.sqf
+// https://github.com/acemod/ACE3/blob/76676eee462cb0bbe400a482561c148d8652b550/addons/common/functions/fnc_getItemType.sqf
+	
 	private _type = [_x] call ace_common_fnc_getItemType;
 
 	// Vests

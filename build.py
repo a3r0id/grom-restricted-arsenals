@@ -15,7 +15,7 @@ def config():
     return Config(json.load(open(BUILD_CONFIG)))
 
 CONFIG          = config()
-BUILD_FOLDER    = join(getcwd(),"tmp")
+BUILD_FOLDER    = join(getcwd(),"grra")
 ADDONS_FOLDER   = join(join(getcwd(),"Grom Restricted Arsenals"),"Addons")
 KEYS_FOLDER     = join(join(getcwd(),"Grom Restricted Arsenals"),"Keys")
 
@@ -23,6 +23,7 @@ KEYS_FOLDER     = join(join(getcwd(),"Grom Restricted Arsenals"),"Keys")
 print ("\r\n[+] Rebuilding BUILD_FOLDER folder...")
 mkdir(BUILD_FOLDER)
 
+# Copy the project files
 print ("[+] Copying project to BUILD_FOLDER folder...")
 shutil.copytree(join(getcwd(),"functions"), join(BUILD_FOLDER,"functions"))
 shutil.copytree(join(getcwd(),"data"), join(BUILD_FOLDER,"data"))

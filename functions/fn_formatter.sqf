@@ -1,10 +1,15 @@
+/*
+	File: formatter.sqf
+	Author: Grom -> https://github.com/a3r0id
+	Description: 
+		- Defines, Opens and runs the arsenal formatter.
+		- Works both in-game as well as in 3den editor.
+*/
 
-// https://forums.bohemia.net/forums/topic/223781-display3den-and-finddisplay-46/?tab=comments#comment-3362519
 uiNamespace setVariable ["GFC_ITEMS_ALL", call GRRA_fnc_aceGetAllCfgItems];
 with uiNamespace do 
 {
 
-	//waitUntil { !isNull (findDisplay 46) };
 	disableSerialization; 
 
 	FNC_SETTEXT = {
@@ -59,23 +64,23 @@ with uiNamespace do
 	GFC_CONTROL_TEXT_BOX ctrlCommit 0;
 
 	// button-set  [COPY] [IMPORT] [CLEAR]
-	GFC_CONTROL_BTN_COPY = GFC_DISPLAY ctrlCreate ["RscShortcutButton", -1, GFC_CONTROL_GROUP];
-	GFC_CONTROL_BTN_COPY ctrlSetPosition [safeZoneW * 0.015, safeZoneH * 0.78, safeZoneW * 0.08, safeZoneH * 0.05];
-	GFC_CONTROL_BTN_COPY ctrlSetText "EXPORT";
-	GFC_CONTROL_BTN_COPY ctrlSetTooltip "Export the current arsenal array to clipboard";
-	GFC_CONTROL_BTN_COPY ctrlAddEventHandler ["ButtonClick", {
+	GFC_CONTROL_BTN_EXPORT = GFC_DISPLAY ctrlCreate ["RscShortcutButton", -1, GFC_CONTROL_GROUP];
+	GFC_CONTROL_BTN_EXPORT ctrlSetPosition [safeZoneW * 0.015, safeZoneH * 0.78, safeZoneW * 0.08, safeZoneH * 0.05];
+	GFC_CONTROL_BTN_EXPORT ctrlSetText "EXPORT";
+	GFC_CONTROL_BTN_EXPORT ctrlSetTooltip "Export the current arsenal array to clipboard";
+	GFC_CONTROL_BTN_EXPORT ctrlAddEventHandler ["ButtonClick", {
 		with uiNamespace do {
 			copyToClipboard (str GFC_MY_CURRENT_ARSENAL);
 			["Exported to clipboard!", 2] call FNC_NOTIFICATION;
 		};
 	}];
-	GFC_CONTROL_BTN_COPY ctrlCommit 0;
+	GFC_CONTROL_BTN_EXPORT ctrlCommit 0;
 
-	GFC_CONTROL_BTN_VALIDATE = GFC_DISPLAY ctrlCreate ["RscShortcutButton", -1, GFC_CONTROL_GROUP];
-	GFC_CONTROL_BTN_VALIDATE ctrlSetPosition [safeZoneW * 0.125, safeZoneH * 0.78, safeZoneW * 0.08, safeZoneH * 0.05];
-	GFC_CONTROL_BTN_VALIDATE ctrlSetText "IMPORT";
-	GFC_CONTROL_BTN_VALIDATE ctrlSetTooltip "DISABLED IN MP: Import an arsenal array from clipboard";
-	GFC_CONTROL_BTN_VALIDATE ctrlAddEventHandler ["ButtonClick", {
+	GFC_CONTROL_BTN_IMPORT = GFC_DISPLAY ctrlCreate ["RscShortcutButton", -1, GFC_CONTROL_GROUP];
+	GFC_CONTROL_BTN_IMPORT ctrlSetPosition [safeZoneW * 0.125, safeZoneH * 0.78, safeZoneW * 0.08, safeZoneH * 0.05];
+	GFC_CONTROL_BTN_IMPORT ctrlSetText "IMPORT";
+	GFC_CONTROL_BTN_IMPORT ctrlSetTooltip "DISABLED IN MP: Import an arsenal array from clipboard";
+	GFC_CONTROL_BTN_IMPORT ctrlAddEventHandler ["ButtonClick", {
 		with uiNamespace do {
 			_clip = copyFromClipboard;
 			if (_clip isEqualTo "") exitWith { ["Clipboard is empty or in MP game!", 2] call FNC_NOTIFICATION; };
@@ -87,9 +92,7 @@ with uiNamespace do
 			["Imported from clipboard!", 2] call FNC_NOTIFICATION;
 		};
 	}];	
-	// NOT WORKING
-	//GFC_CONTROL_BTN_VALIDATE ctrlEnable false;
-	GFC_CONTROL_BTN_VALIDATE ctrlCommit 0;
+	GFC_CONTROL_BTN_IMPORT ctrlCommit 0;
 
 	GFC_CONTROL_BTN_CLEAR = GFC_DISPLAY ctrlCreate ["RscShortcutButton", -1, GFC_CONTROL_GROUP];
 	GFC_CONTROL_BTN_CLEAR ctrlSetPosition [safeZoneW * 0.235, safeZoneH * 0.78, safeZoneW * 0.08, safeZoneH * 0.05];
@@ -241,9 +244,6 @@ with uiNamespace do
 		saveProfileNamespace;	
 	};
 
-	// setup UI
-	call FNC_PARSE_TEXT_BOX_AND_UPDATE_UI;
-
 	FNC_ARSENAL_ADD = {
 		params["_item"];
 		if (_item in GFC_MY_CURRENT_ARSENAL) exitWith {}; 
@@ -269,6 +269,9 @@ with uiNamespace do
 			} forEach GFC_CURRENT_OPTIONS;		
 		};
 	};
+	
+	// setup UI
+	call FNC_PARSE_TEXT_BOX_AND_UPDATE_UI;
 
 };
 
