@@ -55,6 +55,8 @@ Using the formatting tool, you can easily create your arsenals and export them i
 
 > The formatting tool can also be opened in-game by locally calling `[] call GRRA_fnc_formatter;`.
 
+![](https://steamuserimages-a.akamaihd.net/ugc/2013706759566274775/1BCD717428451A1659526291F45C23D5E456B5C1/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=#000000&letterbox=false)
+
 --------
 
 ### __FAQ__
