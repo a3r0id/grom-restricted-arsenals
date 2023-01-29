@@ -7,6 +7,10 @@
 
 > To use a module, simply drop the module anywhere in your mission's map in 3den editor and double-click on it to configure. Modules can be found under the "Systems" category in 3den editor.
 
+![](https://steamuserimages-a.akamaihd.net/ugc/2013706759566266819/D3728CD87EFA72EC6F1B99386BDA5C6C4D71B8B2/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=#000000&letterbox=false)
+
+--------
+
 #### [1] Base Arsenal
 
 > A basic, whitelisted arsenal that everyone can access. This module can also be restricted to a specific side, ie: `BLUFOR`. You can make make as many as needed, ie: one for each "side" (or team in a pvp gammode etc).
