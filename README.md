@@ -81,9 +81,9 @@ Using the formatting tool, you can easily create your arsenals and export them i
 
 ### __Todos__
 
-> combine player's arsenal where classname is also a var that's used???
+> combine player's arsenals where both classname and variable name are used.
 
-> add button to open formatter in pause menu
+> add button to open formatter in pause menu.
 
-> add a feature that makes it easier to find compatible ammo for a specific weapon (ace's "single mag" icon option)
+> add a feature that makes it easier to find compatible ammo for a specific weapon (ace's "single mag" icon option).
 
