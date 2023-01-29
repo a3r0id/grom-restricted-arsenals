@@ -9,11 +9,11 @@
 
 #### [1] Base Arsenal
 
-> A basic, whitelisted arsenal that can everyone can access. This module can also be restricted to a specific side, ie: `BLUFOR`. You can make make as many as needed, ie: one for each "side" (or team in a pvp gammode etc).
+> A basic, whitelisted arsenal that everyone can access. This module can also be restricted to a specific side, ie: `BLUFOR`. You can make make as many as needed, ie: one for each "side" (or team in a pvp gammode etc).
 
 #### [2] Restricted Arsenal
 
-> A whitelisted arsenal that can only certain players with a specific role can access, ie: `Machinegunner@anything` as well as to a specific side, ie: `BLUFOR`.
+> A whitelisted arsenal in which only certain players with a specific role can access, ie: `Machinegunner@anything` as well as to a specific side, ie: `BLUFOR`.
 
 --------
 
