@@ -35,6 +35,12 @@
 
 --------
 
+### Formatting Tool (3den editor plugin)
+
+> Docs coming soon
+
+--------
+
 ### __Todos__
 
 > combine player's arsenal where classname is also a var that's used???
@@ -42,3 +48,4 @@
 > add button to open formatter in pause menu
 
 > add a feature that makes it easier to find compatible ammo for a specific weapon (ace's "single mag" icon option)
+
