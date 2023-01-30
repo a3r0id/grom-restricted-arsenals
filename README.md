@@ -48,8 +48,8 @@ Item1, Item2, Item3
 
 --------
 
-### __Formatting Tool (3den editor plugin)__
-Using the formatting tool, you can easily create your arsenals and export them in a format that can be pasted directly pasted in the `Items` attribute.
+### __Arsenal Formatter (3den editor plugin)__
+Using the formatting tool, you can easily create your arsenals and export them in a format that can be pasted directly pasted into the `Items` attribute field in 3den.
 
 - To open the formatting tool, simply open the 3den editor and navigate to the `Tools` tab then click `Arsenal Formatter`.
 
@@ -59,7 +59,7 @@ Using the formatting tool, you can easily create your arsenals and export them i
 
 - The formatting tool can also be opened in-game by locally calling `[] call GRRA_fnc_formatter;`.
 
-![](https://steamuserimages-a.akamaihd.net/ugc/2013706759566274775/1BCD717428451A1659526291F45C23D5E456B5C1/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=#000000&letterbox=false)
+![](https://steamuserimages-a.akamaihd.net/ugc/2013706759567545713/45EAA2FA615EA58637D040CDF6EF54A7168F12B8/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=#000000&letterbox=false)
 
 --------
 
@@ -67,15 +67,19 @@ Using the formatting tool, you can easily create your arsenals and export them i
 
 - __Q:__ Will multiple arsenals be combined if they apply to the same player?
 
-- __A:__ Yes. If you have multiple arsenals that apply to the same player, they will be combined into one arsenal, with the exception that arsenals that are owned by a classname and arsenals that are owned by a variable name will not connect properly. 
+- __A:__ Yes. If you have multiple arsenals that apply to the same player, they will be combined into one arsenal, with the exception that arsenals that are owned by a classname and arsenals that are owned by a variable name will not merge properly. 
 
 - __Q:__ How do I add a weapon to the arsenal?
 
-- __A:__ You can add a weapon to the arsenal by adding the weapon's classname to the `Items` attribute. For example, if you wanted to add the `arifle_MX_Black_F` weapon to the arsenal, you would add `arifle_MX_Black_F` to your list of items like so: `Item1, Item2, arifle_MX_Black_F`.
+- __A:__ You can add a weapon to the arsenal by simply adding the weapon's classname to the `Items` attribute. For example, if you wanted to add the `arifle_MX_Black_F` weapon to the arsenal, you would add `arifle_MX_Black_F` to your list of items like so: `Item1, Item2, arifle_MX_Black_F`.
 
-- __Q:__ Will the arsenal automatically add compatible ammo to the arsenal?
+- __Q:__ Will the mod automatically add compatible ammo to the arsenal?
 
 - __A:__ Not yet, but this is a feature that will be added in the future.
+
+- __Q:__ Does the mod need to be installed on the server as well?
+
+- __A:__ No, the mod only needs to be installed on the client but the key must be present in the server's keys directory.
 
 --------
 
