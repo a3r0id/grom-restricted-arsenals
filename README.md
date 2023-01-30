@@ -1,5 +1,5 @@
 # Grom Restricted Arsenals (Alpha)
- A useful Arma 3 mod that allows creators to initialize an infinite amount of arsenals, restricted by player role and other attributes. 
+ A useful Arma 3 mod that allows creators to initialize an infinite amount of whitelisted arsenals, restricted by player role and other attributes. 
 
  [View on Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2925570747)
 
