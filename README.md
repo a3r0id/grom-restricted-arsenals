@@ -69,7 +69,7 @@ Using the formatting tool, you can easily create your arsenals and export them i
 
 - __Q:__ Will multiple arsenals be combined if they apply to the same player?
 
-- __A:__ Yes. If you have multiple arsenals that apply to the same player, they will be combined into one arsenal, with the exception that arsenals that are owned by a classname and arsenals that are owned by a variable name will not merge properly. 
+- __A:__ Yes. If you have multiple arsenals that apply to the same player, they will be combined into one arsenal, with the exception of arsenals that are owned by a classname and arsenals that are owned by a variable name will not merge properly. 
 
 - __Q:__ How do I add a weapon to the arsenal?
 
