@@ -25,7 +25,7 @@ class CfgPatches
 		tooltipOwned=GRRA_MOD_DESCRIPTION;
 		picture=GRRA_MOD_LOGO;
 		url="https://github.com/a3r0id";
-		units[] = {"GRRA_ModuleRoleRestrictedArsenal"};
+		units[] = {"GRRA_ModuleRoleRestrictedArsenal", "GRRA_ModuleBaseArsenal", "GRRA_AceArsenalOverride"};
 		requiredVersion = 1.0;
 		requiredAddons[] = {"A3_Modules_F", "3DEN"};
 	};

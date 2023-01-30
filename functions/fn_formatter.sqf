@@ -1,16 +1,14 @@
-/*
-	File: formatter.sqf
-	Author: Grom -> https://github.com/a3r0id
-	Description: 
-		- Defines, Opens and runs the arsenal formatter.
-		- Works both in-game as well as in 3den editor.
-*/
-
 uiNamespace setVariable ["GFC_ITEMS_ALL", call GRRA_fnc_aceGetAllCfgItems];
 with uiNamespace do 
 {
 
 	disableSerialization; 
+
+	GFC_COLOR_WHITE 		= [0.8, 0.8, 0.8, 1];
+	GFC_COLOR_WHITE_FULL 	= [1, 1, 1, 1];
+	GFC_COLOR_BLACK 	 	= [0, 0, 0, 1];
+	GFC_COLOR_GREEN 	 	= [0, 0.6, 0, 1];
+	GFC_COLOR_RED 		 	= [0.6, 0, 0, 1];
 
 	FNC_SETTEXT = {
 		params ["_control", "_text"];
@@ -53,20 +51,20 @@ with uiNamespace do
 	GFC_CONTROL_BG = GFC_DISPLAY ctrlCreate ["RscTextMulti", -1, GFC_CONTROL_GROUP];
 	GFC_CONTROL_BG ctrlEnable false;
 	GFC_CONTROL_BG ctrlSetPosition [0, 0, 1, 1];
-	GFC_CONTROL_BG ctrlSetBackgroundColor [0, 0, 0, 1];
-	//GFC_CONTROL_BG ctrlSetStructuredText parseText "<img image='\GRRA\data\grra.paa' size='1' align='center' />";
+	GFC_CONTROL_BG ctrlSetBackgroundColor GFC_COLOR_BLACK;
 	GFC_CONTROL_BG ctrlCommit 0;
 
 	GFC_CONTROL_TEXT_BOX = GFC_DISPLAY ctrlCreate ["RscEditMulti", IDC_EDIT_BOX, GFC_CONTROL_GROUP];
+	GFC_CONTROL_TEXT_BOX ctrlSetFont "RobotoCondensedLight";
 	GFC_CONTROL_TEXT_BOX ctrlSetPosition [safeZoneW * 0.015, safeZoneH * 0.02, safeZoneW * 0.3, safeZoneH * 0.75];
 	GFC_CONTROL_TEXT_BOX ctrlSetBackgroundColor [0.1, 0.1, 0.1, 1];
 	GFC_CONTROL_TEXT_BOX ctrlEnable false;
 	GFC_CONTROL_TEXT_BOX ctrlCommit 0;
 
 	// button-set  [COPY] [IMPORT] [CLEAR]
-	GFC_CONTROL_BTN_EXPORT = GFC_DISPLAY ctrlCreate ["RscShortcutButton", -1, GFC_CONTROL_GROUP];
+	GFC_CONTROL_BTN_EXPORT = GFC_DISPLAY ctrlCreate ["RscButtonMenu", -1, GFC_CONTROL_GROUP];
 	GFC_CONTROL_BTN_EXPORT ctrlSetPosition [safeZoneW * 0.015, safeZoneH * 0.78, safeZoneW * 0.08, safeZoneH * 0.05];
-	GFC_CONTROL_BTN_EXPORT ctrlSetText "EXPORT";
+	GFC_CONTROL_BTN_EXPORT ctrlSetStructuredText parseText "<t shadow='2' valign='center' color='#FFFFFF' align='center'>EXPORT</t>";
 	GFC_CONTROL_BTN_EXPORT ctrlSetTooltip "Export the current arsenal array to clipboard";
 	GFC_CONTROL_BTN_EXPORT ctrlAddEventHandler ["ButtonClick", {
 		with uiNamespace do {
@@ -76,9 +74,9 @@ with uiNamespace do
 	}];
 	GFC_CONTROL_BTN_EXPORT ctrlCommit 0;
 
-	GFC_CONTROL_BTN_IMPORT = GFC_DISPLAY ctrlCreate ["RscShortcutButton", -1, GFC_CONTROL_GROUP];
+	GFC_CONTROL_BTN_IMPORT = GFC_DISPLAY ctrlCreate ["RscButtonMenu", -1, GFC_CONTROL_GROUP];
 	GFC_CONTROL_BTN_IMPORT ctrlSetPosition [safeZoneW * 0.125, safeZoneH * 0.78, safeZoneW * 0.08, safeZoneH * 0.05];
-	GFC_CONTROL_BTN_IMPORT ctrlSetText "IMPORT";
+	GFC_CONTROL_BTN_IMPORT ctrlSetStructuredText parseText "<t shadow='2' valign='center' color='#FFFFFF' align='center'>IMPORT</t>";
 	GFC_CONTROL_BTN_IMPORT ctrlSetTooltip "DISABLED IN MP: Import an arsenal array from clipboard";
 	GFC_CONTROL_BTN_IMPORT ctrlAddEventHandler ["ButtonClick", {
 		with uiNamespace do {
@@ -94,9 +92,9 @@ with uiNamespace do
 	}];	
 	GFC_CONTROL_BTN_IMPORT ctrlCommit 0;
 
-	GFC_CONTROL_BTN_CLEAR = GFC_DISPLAY ctrlCreate ["RscShortcutButton", -1, GFC_CONTROL_GROUP];
+	GFC_CONTROL_BTN_CLEAR = GFC_DISPLAY ctrlCreate ["RscButtonMenu", -1, GFC_CONTROL_GROUP];
 	GFC_CONTROL_BTN_CLEAR ctrlSetPosition [safeZoneW * 0.235, safeZoneH * 0.78, safeZoneW * 0.08, safeZoneH * 0.05];
-	GFC_CONTROL_BTN_CLEAR ctrlSetText "CLEAR";
+	GFC_CONTROL_BTN_CLEAR ctrlSetStructuredText parseText "<t shadow='2' valign='center' color='#FFFFFF' align='center'>CLEAR</t>";
 	GFC_CONTROL_BTN_CLEAR ctrlSetTooltip "Erase the current arsenal array";
 	GFC_CONTROL_BTN_CLEAR ctrlAddEventHandler ["ButtonClick", {
 		with uiNamespace do {
@@ -111,7 +109,7 @@ with uiNamespace do
 	GFC_NOTIFICATION_TEXT = GFC_DISPLAY ctrlCreate ["RscText", -1, GFC_CONTROL_GROUP];
 	GFC_NOTIFICATION_TEXT ctrlSetPosition [safeZoneW * 0.325, safeZoneH * 0.78, safeZoneW * 0.305, safeZoneH * 0.05];
 	GFC_NOTIFICATION_TEXT ctrlSetBackgroundColor [0.1, 0.1, 0.1, 1];
-	GFC_NOTIFICATION_TEXT ctrlSetForegroundColor [1, 1, 1, 1];
+	GFC_NOTIFICATION_TEXT ctrlSetTextColor GFC_COLOR_WHITE_FULL;
 	GFC_NOTIFICATION_TEXT ctrlCommit 0;
 
 	GFC_WEAPON_TYPES = [
@@ -146,9 +144,9 @@ with uiNamespace do
 	GFC_CONTROL_LISTBOX_TYPES ctrlCommit 0;
 
 	{
-		private _thisControl = GFC_DISPLAY ctrlCreate ["RscShortcutButton", -1, GFC_CONTROL_LISTBOX_TYPES];
-		_thisControl ctrlSetPosition [safeZoneW * 0.0075, _forEachIndex * safeZoneH * 0.05, safeZoneW * 0.1, safeZoneH * 0.05];// [safeZoneW * 0.325, (safeZoneH * _forEachIndex) * 0.0375, safeZoneW * 0.65, safeZoneH * 0.05];
-		_thisControl ctrlSetText (_x select 0);
+		private _thisControl = GFC_DISPLAY ctrlCreate ["RscButtonMenu", -1, GFC_CONTROL_LISTBOX_TYPES];
+		_thisControl ctrlSetPosition [safeZoneW * 0.0075, _forEachIndex * safeZoneH * 0.05, safeZoneW * 0.1, safeZoneH * 0.0525];// [safeZoneW * 0.325, (safeZoneH * _forEachIndex) * 0.0375, safeZoneW * 0.65, safeZoneH * 0.05];
+		_thisControl ctrlSetStructuredText parseText format ["<t shadow='1' size='0.9' color='#FFFFFF' align='left'>%1</t>", _x select 0];
 		_thisControl ctrlSetBackgroundColor [0.1, 0.1, 0.1, 1];
 		_typeIndex = _x select 1;
 		_items = [];
@@ -172,17 +170,17 @@ with uiNamespace do
 				private _configPath = GFC_CURRENT_CONTROL_TYPE getVariable "GFC_TYPE_CONFIGTYPE";
 				{ctrlDelete _x} forEach GFC_CURRENT_OPTIONS;
 				{
-					private _thisControl = GFC_DISPLAY ctrlCreate ["RscShortcutButton", -1, GFC_CONTROL_LISTBOX_ITEMS];					
+					private _thisControl = GFC_DISPLAY ctrlCreate ["RscButtonMenu", -1, GFC_CONTROL_LISTBOX_ITEMS];					
 					_thisControl setVariable ["ITEM_CLASS", _x];
 					if (_x in GFC_MY_CURRENT_ARSENAL) then {
-						_thisControl ctrlSetBackgroundColor [1, 1, 1, 1];
+						_thisControl ctrlSetBackgroundColor GFC_COLOR_WHITE;
+						_thisControl ctrlSetTextColor GFC_COLOR_GREEN;
 					} else {
-						_thisControl ctrlSetBackgroundColor [0, 0, 0, 1];
+						_thisControl ctrlSetBackgroundColor GFC_COLOR_BLACK;
+						_thisControl ctrlSetTextColor GFC_COLOR_WHITE_FULL;
 					};			
 					
-					// Todo: remove focus from this control and set focus to the parent control, looks better imo
-					_thisControl ctrlSetActiveColor     [0, 0, 0, 1];
-					_thisControl ctrlSetPosition [safeZoneW * 0.015, _forEachIndex * safeZoneH * 0.05, safeZoneW * 1.75, safeZoneH * 0.05];
+					_thisControl ctrlSetPosition [safeZoneW * 0.015, _forEachIndex * safeZoneH * 0.05, safeZoneW * 1.75, safeZoneH * 0.0525];
 					_displayText = getText (configfile >> _configPath >> _x >> "displayName");
 					_thisControl ctrlSetTooltip _displayText;
 					_thisControl ctrlSetStructuredText parseText format ["<img size='1.5' image='%2'/> <t font='PuristaMedium' align='left' size='0.8'>%1</t>", _displayText, getText (configfile >> _configPath >> _x >> "picture")];
@@ -196,10 +194,12 @@ with uiNamespace do
 							_itemClass = _ctrl getVariable "ITEM_CLASS";
 							if (_itemClass in GFC_MY_CURRENT_ARSENAL) then {
 								[_itemClass] call FNC_ARSENAL_REMOVE;
-								_ctrl ctrlSetBackgroundColor [0, 0, 0, 1];
+								_ctrl ctrlSetBackgroundColor GFC_COLOR_BLACK;
+								_ctrl ctrlSetTextColor 		 GFC_COLOR_WHITE_FULL;
 							} else {
 								[_itemClass] call FNC_ARSENAL_ADD;
-								_ctrl ctrlSetBackgroundColor [1, 1, 1, 1];
+								_ctrl ctrlSetBackgroundColor GFC_COLOR_WHITE;
+								_ctrl ctrlSetTextColor 		 GFC_COLOR_GREEN;
 							};
 							_ctrl ctrlCommit 0;
 							[] call FNC_PARSE_TEXT_BOX_AND_UPDATE_UI;						
@@ -212,7 +212,7 @@ with uiNamespace do
 					_x ctrlSetBackgroundColor [0.1, 0.1, 0.1, 1];
 					_x ctrlCommit 0;
 				} forEach GFC_CURRENT_TYPES;
-				GFC_CURRENT_CONTROL_TYPE ctrlSetBackgroundColor [1, 1, 1, 1];
+				GFC_CURRENT_CONTROL_TYPE ctrlSetBackgroundColor GFC_COLOR_WHITE;
 			};			
 		}]; 
 		_thisControl ctrlCommit 0;
@@ -261,9 +261,11 @@ with uiNamespace do
 		with uiNamespace do {
 			{
 				if ((_x getVariable "ITEM_CLASS") in GFC_MY_CURRENT_ARSENAL) then {
-					_x ctrlSetBackgroundColor [1, 1, 1, 1];
+					_x ctrlSetBackgroundColor GFC_COLOR_WHITE;
+					_x ctrlSetTextColor 	  GFC_COLOR_GREEN;
 				} else {
-					_x ctrlSetBackgroundColor [0, 0, 0, 1];
+					_x ctrlSetBackgroundColor GFC_COLOR_BLACK;
+					_x ctrlSetTextColor 	  GFC_COLOR_WHITE_FULL;
 				};			
 				_x ctrlCommit 0;	
 			} forEach GFC_CURRENT_OPTIONS;		
