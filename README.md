@@ -47,6 +47,25 @@ Dropping this module into your mission will automatically convert all restricted
 
 Item1, Item2, Item3
 ```
+Per update 0.1.3, you can now pass in a file path or even multiple files paths. 
+This enables better organization of arsenal items and allows mission scripters to chain multiple arsenal files together.
+Single file syntax is as follows:
+```sqf
+file://path\to\file1.sqf
+```
+Multiple file syntax is as follows:
+```sqf
+file://path\to\file1.sqf//path\to\file2.sqf//path\to\file3.sqf
+```
+Since we're parsing the file AS CODE, AND NOT A STRING, your file format should look like this:
+```sqf
+[
+    "Item1",
+    "Item2",
+    "Item3"
+]
+```
+This is because we're using SQF's [compile](https://community.bistudio.com/wiki/compile) syntax to parse the file as code, and not using my proprietary parser to parse the file contents as a string.
 
 --------
 
@@ -87,9 +106,9 @@ Using the formatting tool, you can easily create your arsenals and export them i
 
 ### __Todos__
 
-- combine player's arsenals where both classname and variable name are used.
+- Combine player's arsenals where both classname and variable name are used.
 
-- add button to open formatter in pause menu.
+- ~~Add button to open formatter in pause menu.~~
 
-- add a feature that makes it easier to find compatible ammo for a specific weapon (ace's "single mag" icon option).
+- Add a feature that makes it easier to find compatible ammo for a specific weapon (similar to ace's single mag icon option).
 
