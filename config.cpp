@@ -119,7 +119,7 @@ class CfgVehicles
 			{
                 property = "GRRA_ModuleRoleRestrictedArsenal_Items";
 				displayName = "Items";
-				tooltip = "Array/comma-seperated values of items that the unit/s can use.";
+				tooltip = "Array/comma-seperated values of items that the unit/s can use. Also accepts file/s; IE: 'file://path\to\file.sqf' or 'file://path\to\file.sqf//path\to\file2.sqf'.";
 				// Default text for the input box:
 				defaultValue = """[]"""; // Because this is an expression, one must have a string within a string to return a string
 			};            
@@ -175,7 +175,7 @@ class CfgVehicles
 			{
                 property = "GRRA_ModuleBaseArsenal_Items";
 				displayName = "Items";
-				tooltip = "Array/comma-seperated values of items included in the base arsenal.";
+				tooltip = "Array/comma-seperated values of items that the unit/s can use. Also accepts file/s; IE: 'file://path\to\file.sqf' or 'file://path\to\file.sqf//path\to\file2.sqf'.";
 				defaultValue = """[]""";
 			};            
 		};

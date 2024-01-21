@@ -4,10 +4,9 @@
 	Usage: (postInit) GRRA_fnc_initPlayer;
 */
 
-if (isServer && !hasInterface) exitWith {};
+if (!hasInterface) exitWith {};
 
-//systemChat format ["GRRA: %1", "Initializing player"];
-
+// Global flag to determine if we should use the vanilla arsenal or ace arsenal
 GRRA_USE_VANILLA_ARSENAL = false;
 
 // hashmap of arsenal objects defined by classname
@@ -18,17 +17,31 @@ GRRA_VARS_MAP       = createhashmapfromarray[];
 
 _fnc_createOrAddArsenal = {
 	params ["_logicModule"];
+	private ["_classNameOrVariable", "_globalVariable", "_gVarCopy"];
+	
+	// get the $Items variable from the logic object
+	private _items = _logicModule getVariable ["Items", []];
 
-	// get a copy of the global variable
-	_items 				 = [_logicModule getVariable "Items"] call GRRA_fnc_strToArray;
+	// if the string contains the file:// prefix, we can assume it's a file path or a list of file paths.
+	// This can be used by mission makers to define a list of items in a separate file and even chain multiple files together.
+	if ("file://" in _items) then {
+		_items = [_items] call GRRA_fnc_fileStringToArray
+	} else {
+		_items = [_items] call GRRA_fnc_strToArray;
+	};
+	
+	// get the $Owner variable (className or variable name of the arsenal vehicle) from the logic object
 	_classNameOrVariable = _logicModule getVariable "Owner";
-	// default to GRRA_CLASSES_MAP as className usage will be more common, id assume...
+
+	// default to GRRA_CLASSES_MAP as className usage will be more common, id assume.
 	_globalVariable 	 = "GRRA_CLASSES_MAP";  
 
+	// if the variable is not nil, then we can assume it's a variable name and not a classname 
 	if !(isNil _classNameOrVariable) then {
 		_globalVariable = "GRRA_VARS_MAP";
 	};
 
+	// get the current global variable (either GRRA_CLASSES_MAP or GRRA_VARS_MAP)
 	_gVarCopy = missionNamespace getVariable _globalVariable;
 
 	// check if the class/var name is already in the hashmap

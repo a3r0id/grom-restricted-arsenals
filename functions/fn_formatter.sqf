@@ -10,7 +10,7 @@ with uiNamespace do
 	GFC_COLOR_GREEN 	 	= [0, 0.6, 0, 1];
 	GFC_COLOR_RED 		 	= [0.6, 0, 0, 1];
 
-	FNC_SETTEXT = {
+	GRRA_FNC_SETTEXT = {
 		params ["_control", "_text"];
 		_control ctrlSetText _text;
 		_control ctrlCommit 0;
@@ -69,7 +69,7 @@ with uiNamespace do
 	GFC_CONTROL_BTN_EXPORT ctrlAddEventHandler ["ButtonClick", {
 		with uiNamespace do {
 			copyToClipboard (str GFC_MY_CURRENT_ARSENAL);
-			["Exported to clipboard!", 2] call FNC_NOTIFICATION;
+			["Exported to clipboard!", 2] call GRRA_FNC_NOTIFICATION;
 		};
 	}];
 	GFC_CONTROL_BTN_EXPORT ctrlCommit 0;
@@ -81,13 +81,13 @@ with uiNamespace do
 	GFC_CONTROL_BTN_IMPORT ctrlAddEventHandler ["ButtonClick", {
 		with uiNamespace do {
 			_clip = copyFromClipboard;
-			if (_clip isEqualTo "") exitWith { ["Clipboard is empty or in MP game!", 2] call FNC_NOTIFICATION; };
+			if (_clip isEqualTo "") exitWith { ["Clipboard is empty or in MP game!", 2] call GRRA_FNC_NOTIFICATION; };
 			GFC_MY_CURRENT_ARSENAL = [];
-			[] call FNC_PARSE_TEXT_BOX_AND_UPDATE_UI;	
+			[] call GRRA_FNC_PARSE_TEXT_BOX_AND_UPDATE_UI;	
 			GFC_MY_CURRENT_ARSENAL = [_clip] call GRRA_fnc_strToArray;
-			[] call FNC_PARSE_TEXT_BOX_AND_UPDATE_UI;
-			[] call FNC_DELEGATE_CURRENT_ITEMS_LIST;
-			["Imported from clipboard!", 2] call FNC_NOTIFICATION;
+			[] call GRRA_FNC_PARSE_TEXT_BOX_AND_UPDATE_UI;
+			[] call GRRA_FNC_DELEGATE_CURRENT_ITEMS_LIST;
+			["Imported from clipboard!", 2] call GRRA_FNC_NOTIFICATION;
 		};
 	}];	
 	GFC_CONTROL_BTN_IMPORT ctrlCommit 0;
@@ -99,9 +99,9 @@ with uiNamespace do
 	GFC_CONTROL_BTN_CLEAR ctrlAddEventHandler ["ButtonClick", {
 		with uiNamespace do {
 			GFC_MY_CURRENT_ARSENAL = [];
-			[] call FNC_PARSE_TEXT_BOX_AND_UPDATE_UI;
-			[] call FNC_DELEGATE_CURRENT_ITEMS_LIST;	
-			["Arsenal cleared!", 2] call FNC_NOTIFICATION;
+			[] call GRRA_FNC_PARSE_TEXT_BOX_AND_UPDATE_UI;
+			[] call GRRA_FNC_DELEGATE_CURRENT_ITEMS_LIST;	
+			["Arsenal cleared!", 2] call GRRA_FNC_NOTIFICATION;
 		};
 	}];
 	GFC_CONTROL_BTN_CLEAR ctrlCommit 0;
@@ -193,16 +193,16 @@ with uiNamespace do
 							_ctrl = GFC_CURRENT_ITEM_CLICKED;
 							_itemClass = _ctrl getVariable "ITEM_CLASS";
 							if (_itemClass in GFC_MY_CURRENT_ARSENAL) then {
-								[_itemClass] call FNC_ARSENAL_REMOVE;
+								[_itemClass] call GRRA_FNC_ARSENAL_REMOVE;
 								_ctrl ctrlSetBackgroundColor GFC_COLOR_BLACK;
 								_ctrl ctrlSetTextColor 		 GFC_COLOR_WHITE_FULL;
 							} else {
-								[_itemClass] call FNC_ARSENAL_ADD;
+								[_itemClass] call GRRA_FNC_ARSENAL_ADD;
 								_ctrl ctrlSetBackgroundColor GFC_COLOR_WHITE;
 								_ctrl ctrlSetTextColor 		 GFC_COLOR_GREEN;
 							};
 							_ctrl ctrlCommit 0;
-							[] call FNC_PARSE_TEXT_BOX_AND_UPDATE_UI;						
+							[] call GRRA_FNC_PARSE_TEXT_BOX_AND_UPDATE_UI;						
 						};
 					}];
 					_thisControl ctrlCommit 0;
@@ -225,7 +225,7 @@ with uiNamespace do
 	GFC_CONTROL_LISTBOX_ITEMS ctrlCommit 0;
 
 	/// FUNCTIONS
-	FNC_NOTIFICATION = {
+	GRRA_FNC_NOTIFICATION = {
 		GFC_NOTIFICATION_TEXT ctrlSetText _this#0;
 		_this spawn {
 			sleep (_this#1);
@@ -236,28 +236,28 @@ with uiNamespace do
 		};
 	};
 
-	FNC_PARSE_TEXT_BOX_AND_UPDATE_UI = {
-		//[GFC_NOTIFICATION_TEXT, ""] call FNC_SETTEXT;
+	GRRA_FNC_PARSE_TEXT_BOX_AND_UPDATE_UI = {
+		//[GFC_NOTIFICATION_TEXT, ""] call GRRA_FNC_SETTEXT;
 		GFC_CONTROL_TEXT_BOX ctrlSetText (str GFC_MY_CURRENT_ARSENAL);
 		GFC_CONTROL_TEXT_BOX ctrlCommit 0;
 		profileNamespace setVariable ["GFC_MY_CURRENT_ARSENAL", GFC_MY_CURRENT_ARSENAL];
 		saveProfileNamespace;	
 	};
 
-	FNC_ARSENAL_ADD = {
+	GRRA_FNC_ARSENAL_ADD = {
 		params["_item"];
 		if (_item in GFC_MY_CURRENT_ARSENAL) exitWith {}; 
 		GFC_MY_CURRENT_ARSENAL pushBack _item;
 	};
 
-	FNC_ARSENAL_REMOVE = {
+	GRRA_FNC_ARSENAL_REMOVE = {
 		params["_item"];
 		if !(_item in GFC_MY_CURRENT_ARSENAL) exitWith {}; 
 		GFC_MY_CURRENT_ARSENAL = GFC_MY_CURRENT_ARSENAL - [_item];
 	};
 
 	// Reaccess the items listbox on ui update
-	FNC_DELEGATE_CURRENT_ITEMS_LIST = {
+	GRRA_FNC_DELEGATE_CURRENT_ITEMS_LIST = {
 		with uiNamespace do {
 			{
 				if ((_x getVariable "ITEM_CLASS") in GFC_MY_CURRENT_ARSENAL) then {
@@ -273,7 +273,7 @@ with uiNamespace do
 	};
 	
 	// setup UI
-	call FNC_PARSE_TEXT_BOX_AND_UPDATE_UI;
+	call GRRA_FNC_PARSE_TEXT_BOX_AND_UPDATE_UI;
 
 };
 
