@@ -121,7 +121,7 @@ class CfgVehicles
 				displayName = "Player";
 				tooltip = "Steam64ID of player that can use the arsenal.";
 				// Default text for the input box:
-				defaultValue = """76561198073925845"""; // Because this is an expression, one must have a string within a string to return a string
+				defaultValue = """"""; // Because this is an expression, one must have a string within a string to return a string
 			}
 
 			class Items: Edit
