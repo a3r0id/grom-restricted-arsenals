@@ -68,6 +68,7 @@ _fnc_createOrAddArsenal = {
 	if (typeOf _x == "GRRA_ModuleRoleRestrictedArsenal") then {
 		if !([_x getVariable "Role"] call GRRA_fnc_rolesMatch) then {continue};
 		if !([_x getVariable "Side"] call GRRA_fnc_sidesMatch) then {continue};
+		if !([_x getVariable "Player"] call GRRA_fnc_playerUIDMatch) then {continue};
 		[_x] call _fnc_createOrAddArsenal;
 	};
 

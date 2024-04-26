@@ -115,6 +115,15 @@ class CfgVehicles
 				defaultValue = """Alpha 1-1"""; // Because this is an expression, one must have a string within a string to return a string
 			};
 
+			class Player: Edit
+			{
+				property = "GRRA_ModuleRoleRestrictedArsenal_Player";
+				displayName = "Player";
+				tooltip = "Steam64ID of player that can use the arsenal.";
+				// Default text for the input box:
+				defaultValue = """76561198073925845"""; // Because this is an expression, one must have a string within a string to return a string
+			}
+
 			class Items: Edit
 			{
                 property = "GRRA_ModuleRoleRestrictedArsenal_Items";
