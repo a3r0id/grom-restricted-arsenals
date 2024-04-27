@@ -66,10 +66,20 @@ _fnc_createOrAddArsenal = {
 
 	// check if the module is a RoleRestrictedArsenal, and if the side and role match the player's side and role
 	if (typeOf _x == "GRRA_ModuleRoleRestrictedArsenal") then {
-		if !([_x getVariable "Role"] call GRRA_fnc_rolesMatch) then {continue};
-		if !([_x getVariable "Side"] call GRRA_fnc_sidesMatch) then {continue};
-		if !([_x getVariable "Player"] call GRRA_fnc_playerUIDMatch) then {continue};
-		[_x] call _fnc_createOrAddArsenal;
+		// Note: I've added a small change to the whitelist logic to ensure that users can still use roleDescription/side as limiting factors,
+		// but ultimately, "Player" (steamID) is still the most potent factor and will override all other factors. - Grom
+		
+		// Check if the player matches the SteamID whitelist - if so, add the arsenal automatically - this is good for admins or mission makers while testing
+		if ([_x getVariable "Player"] call GRRA_fnc_playerUIDMatch) then {
+			[_x] call _fnc_createOrAddArsenal;
+			continue;
+		};
+
+		// Check if the player matches the Role whitelist and the Side whitelist
+		if (( [_x getVariable "Role"] call GRRA_fnc_rolesMatch) && ([_x getVariable "Side"] call GRRA_fnc_sidesMatch)) then {
+			[_x] call _fnc_createOrAddArsenal;
+			continue;
+		};
 	};
 
 	// Check if the module is an AceArsenalOverride, and if so, set the global variable to true
