@@ -69,7 +69,7 @@ This is because we're using SQF's [compile](https://community.bistudio.com/wiki/
 
 --------
 
-### __Arsenal Formatter (3den editor plugin)__
+### __Arsenal Formatter (3den editor plugin)[*old - just use ctl+c to copy the classname in the Ace Arsenal interface*]__
 Using the formatting tool, you can easily create your arsenals and export them in a format that can be pasted directly into the `Items` attribute field in 3den.
 
 - To open the formatting tool, simply open the 3den editor and navigate to the `Tools` tab then click `Arsenal Formatter`.
