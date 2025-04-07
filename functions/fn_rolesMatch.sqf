@@ -5,10 +5,4 @@
 */
 
 params ["_definedRole"];
-// callsign (vanilla)
-_callsign = roleDescription player;
-// CBA roleDescription format
-if ('@' in _callsign) then {
-	_callsign = (_callsign splitString '@')#0;
-};
-(_callsign == _definedRole)
+(roleDescription player in _definedRole)

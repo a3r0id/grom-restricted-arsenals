@@ -1,3 +1,5 @@
+#include "CfgFunctions.hpp"
+
 #define GRRA_MOD_DESCRIPTION 3DEN module that allows creators to initialize an infinite amount of ACE arsenals restricted by player role and other attributes.
 #define GRRA_MOD_LOGO 		 grra\data\grra.paa
 #define GRRA_MOD_ICON        grra\data\grra_icon.paa
@@ -206,5 +208,3 @@ class CfgVehicles
 		class Attributes: AttributesBase {};
 	};    	
 };
-
-#include "CfgFunctions.hpp"
