@@ -10,6 +10,7 @@ class CfgFunctions
             class cleanArsenalBox           {};                 // GRRA_fnc_cleanArsenalBox
             class rolesMatch                {};                 // GRRA_fnc_rolesMatch
             class sidesMatch                {};                 // GRRA_fnc_sidesMatch
+            class playerUIDMatch                {};                 // GRRA_fnc_playerUIDMatch
             class strToArray                {};                 // GRRA_fnc_strToArray
             class fileStringToArray         {};                 // GRRA_fnc_fileStringToArray
             class addItemsVanillaArsenal    {};                 // GRRA_fnc_addItemsVanillaArsenal
