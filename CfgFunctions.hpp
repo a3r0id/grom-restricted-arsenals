@@ -15,7 +15,6 @@ class CfgFunctions
             class fileStringToArray         {};                 // GRRA_fnc_fileStringToArray
             class addItemsVanillaArsenal    {};                 // GRRA_fnc_addItemsVanillaArsenal
             class aceGetAllCfgItems         {};                 // GRRA_fnc_aceGetAllCfgItems
-            class formatter                 {};                 // GRRA_fnc_formatter
         };
     };
 };

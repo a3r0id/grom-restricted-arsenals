@@ -19,10 +19,10 @@ _fnc_createOrAddArsenal = {
 	params ["_logicModule"];
 	private ["_classNameOrVariable", "_globalVariable", "_gVarCopy"];
 	
-	// get the $Items variable from the logic object
+	// Get the $Items variable from the logic object
 	private _items = _logicModule getVariable ["Items", []];
 
-	// if the string contains the file:// prefix, we can assume it's a file path or a list of file paths.
+	// If the string contains the file:// prefix, we can assume it's a file path or a list of file paths.
 	// This can be used by mission makers to define a list of items in a separate file and even chain multiple files together.
 	if ("file://" in _items) then {
 		_items = [_items] call GRRA_fnc_fileStringToArray

@@ -112,7 +112,7 @@ class CfgVehicles
 				displayName = "Role";
 				tooltip = "Role of the unit/s that can use the arsenal.";
 				// Default text for the input box:
-				defaultValue = """Alpha 1-1"""; // Because this is an expression, one must have a string within a string to return a string
+				defaultValue = """"""; // Because this is an expression, one must have a string within a string to return a string
 			};
 
 			class Player: Edit
@@ -208,28 +208,3 @@ class CfgVehicles
 };
 
 #include "CfgFunctions.hpp"
-
-class ctrlMenuStrip;
-class display3DEN
-{
-	class Controls
-	{
-		class MenuStrip: ctrlMenuStrip
-		{
-			class Items
-			{
-				class Tools
-				{
-					items[] += {"GRRA_ArsenalEditor"};
-				};
-				class GRRA_ArsenalEditor
-				{
-					text    = "Arsenal Formatter";
-					picture = GRRA_MOD_ICON;
-					action  = "[] call GRRA_fnc_formatter;";
-                    opensNewWindow = 1;
-				};
-			};
-		};
-	};
-};
