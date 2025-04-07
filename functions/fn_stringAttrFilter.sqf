@@ -8,7 +8,6 @@
 params ["_definedRole", "_definedGroup"];
 private ["_playerRole", "_playerGroup"];
 
-
 // If vanilla (not CBA) roleDescription should be something like "Rifleman" or "Medic"
 // If CBA, it should be something like "Rifleman@Tombstone" or "Medic@Tombstone"
 _playerRole = roleDescription player;
