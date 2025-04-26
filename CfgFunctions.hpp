@@ -1,7 +1,7 @@
 class CfgFunctions {
     class GRRA {
         class Functions {
-            file = GRRA_FUNCTIONS_DIR;
+            file = "grra\functions";
             tag = "GRRA";
             class initPlayer {
                 postInit = 1;

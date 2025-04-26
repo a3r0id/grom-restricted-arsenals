@@ -1,16 +1,9 @@
 #include "CfgFunctions.hpp"
 #define GRRA_MOD_DESCRIPTION 3 DEN module that allows creators to initialize an infinite amount of ACE arsenals restricted by player role and other attributes.
-#define GRRA_MOD_LOGO grra\ data\ grra.paa
-#define GRRA_MOD_ICON grra\ data\ grra_icon.paa
+#define GRRA_MOD_LOGO grra\data\grra.paa
+#define GRRA_MOD_ICON grra\data\grra_icon.paa
 #define GRRA_MOD_AUTHOR Grom
 #define GRRA_MOD_NAME Grom Restricted Arsenals
-#ifdef GRRA_DEBUG
-	// running from mission folder
-	#define GRRA_FUNCTIONS_DIR functions
-#else
-	// running as mod
-	#define GRRA_FUNCTIONS_DIR\ GRRA\ functions
-#endif
 
 class CfgPatches {
 	class GRRA {
@@ -31,6 +24,38 @@ class CfgPatches {
 		requiredAddons[] = {
 			"A3_Modules_F",
 			"3DEN"
+		};
+	};
+};
+
+// Base Side Component Class
+class Side: Combo {
+	property = "<default>";
+	displayName = "Side";
+	tooltip = "<default>";
+	typeName = "NUMBER";
+	defaultValue = "0";
+
+	class Values {
+		class opt0 {
+			name = "ALL";
+			value = 0;
+		};
+		class opt1 {
+			name = "BLUFOR";
+			value = 1;
+		};
+		class opt2 {
+			name = "OPFOR";
+			value = 2;
+		};
+		class opt3 {
+			name = "INDEPENDENT";
+			value = 3;
+		};
+		class opt4 {
+			name = "CIVILIAN";
+			value = 4;
 		};
 	};
 };
@@ -65,7 +90,6 @@ class CfgVehicles {
 		displayName = "Restricted Arsenal";
 		icon = GRRA_MOD_ICON;
 		category = "GRRA_Modules";
-
 		function = "";
 		functionPriority = 1;
 		isGlobal = 1;
@@ -75,76 +99,46 @@ class CfgVehicles {
 		curatorInfoType = "";
 
 		class Attributes: AttributesBase {
-			class Side: Combo {
+			
+			// Extend the base attributes
+			class Side: Side {
 				property = "GRRA_ModuleRoleRestrictedArsenal_Side"; // Unique property (use "<GRRA>_<moduleClass>_<attributeClass>" format to ensure that the name is unique)
-				displayName = "Side"; // Argument label
-				tooltip = "Side that can use the arsenal."; // Tooltip description
-				typeName = "NUMBER"; // Value type, can be "NUMBER", "STRING" or "BOOL"
-				defaultValue = "0"; // Default attribute value. Warning: This is an expression, and its returned value will be used (50 in this case).
-
-				// Listbox items:
-				class Values {
-					class opt0 {
-						name = "ALL";
-						value = 0;
-					};
-					class opt1 {
-						name = "BLUFOR";
-						value = 1;
-					};
-					class opt2 {
-						name = "OPFOR";
-						value = 2;
-					};
-					class opt3 {
-						name = "INDEPENDENT";
-						value = 3;
-					};
-					class opt4 {
-						name = "CIVILIAN";
-						value = 4;
-					};
-				};
+				tooltip = "Side that the base arsenal is for."; // Tooltip description
 			};
 
 			class Owner: Edit {
 				property = "GRRA_ModuleRoleRestrictedArsenal_Owner";
 				displayName = "Owner";
 				tooltip = "Variable or classname of the arsenal object.";
-				// Default text for the input box:
-				defaultValue = ""
-				""
-				""; // Because this is an expression, one must have a string within a string to return a string
+				defaultValue = """""";
 			};
 
 			class Role: Edit {
 				property = "GRRA_ModuleRoleRestrictedArsenal_Role";
 				displayName = "Role";
-				tooltip = "Role of the unit/s that can use the arsenal.";
-				// Default text for the input box:
-				defaultValue = ""
-				""
-				""; // Because this is an expression, one must have a string within a string to return a string
+				tooltip = "Role substring of the unit/s that can use the arsenal.";
+				defaultValue = """""";
 			};
+
+			class Group: Edit {
+				property = "GRRA_ModuleRoleRestrictedArsenal_Group";
+				displayName = "Group";
+				tooltip = "Group substring of the unit/s that can use the arsenal.";
+				defaultValue = """""";
+			};			
 
 			class Player: Edit {
 				property = "GRRA_ModuleRoleRestrictedArsenal_Player";
 				displayName = "Player";
 				tooltip = "Steam64ID of player that can use the arsenal. This will override the Role/Side attributes.";
-				// Default text for the input box:
-				defaultValue = ""
-				""
-				""; // Because this is an expression, one must have a string within a string to return a string
+				defaultValue = """""";
 			}
 
 			class Items: Edit {
 				property = "GRRA_ModuleRoleRestrictedArsenal_Items";
 				displayName = "Items";
 				tooltip = "Array/comma-seperated values of items that the unit/s can use. Also accepts file/s; IE: 'file://path\to\file.sqf' or 'file://path\to\file.sqf//path\to\file2.sqf'.";
-				// Default text for the input box:
-				defaultValue = ""
-				"[]"
-				""; // Because this is an expression, one must have a string within a string to return a string
+				defaultValue = """[]""";
 			};
 		};
 	};
@@ -154,7 +148,6 @@ class CfgVehicles {
 		displayName = "Base Arsenal";
 		icon = GRRA_MOD_ICON;
 		category = "GRRA_Modules";
-
 		function = "";
 		functionPriority = 1;
 		isGlobal = 1;
@@ -165,54 +158,24 @@ class CfgVehicles {
 
 		class Attributes: AttributesBase {
 
-			// Module-specific arguments:
-			class Side: Combo {
+			// fart
+			class Side: Side {
 				property = "GRRA_ModuleBaseArsenal_Side";
-				displayName = "Side";
-				tooltip = "Side that has access to the base arsenal.";
-				typeName = "NUMBER";
-				defaultValue = "0";
-
-				class Values {
-					class opt0 {
-						name = "ALL";
-						value = 0;
-					};
-					class opt1 {
-						name = "BLUFOR";
-						value = 1;
-					};
-					class opt2 {
-						name = "OPFOR";
-						value = 2;
-					};
-					class opt3 {
-						name = "INDEPENDENT";
-						value = 3;
-					};
-					class opt4 {
-						name = "CIVILIAN";
-						value = 4;
-					};
-				};
-			};
+				tooltip = "Side that can use the arsenal.";
+			}
 
 			class Owner: Edit {
 				property = "GRRA_ModuleBaseArsenal_Owner";
 				displayName = "Owner";
 				tooltip = "Variable or classname of the arsenal object.";
-				defaultValue = ""
-				""
-				"";
+				defaultValue = """""";
 			};
 
 			class Items: Edit {
 				property = "GRRA_ModuleBaseArsenal_Items";
 				displayName = "Items";
 				tooltip = "Array/comma-seperated values of items that the unit/s can use. Also accepts file/s; IE: 'file://path\to\file.sqf' or 'file://path\to\file.sqf//path\to\file2.sqf'.";
-				defaultValue = ""
-				"[]"
-				"";
+				defaultValue = """[]""";
 			};
 		};
 	};
@@ -222,7 +185,6 @@ class CfgVehicles {
 		displayName = "Force Vanilla Arsenal";
 		icon = GRRA_MOD_ICON;
 		category = "GRRA_Modules";
-
 		function = "";
 		functionPriority = 1;
 		isGlobal = 1;

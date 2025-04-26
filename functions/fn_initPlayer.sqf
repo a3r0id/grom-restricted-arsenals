@@ -19,6 +19,8 @@ _fnc_createOrAddArsenal = {
 	params["_logicModule"];
 	private["_classNameOrVariable", "_globalVariable", "_gVarCopy"];
 
+	systemChat format["Adding Arsenal: %1", _logicModule];
+
 	// Get the $Items variable from the logic object
 	private _items = _logicModule getVariable["Items", []];
 
@@ -60,36 +62,39 @@ _fnc_createOrAddArsenal = {
 {
 	// check if the module is a BaseArsenal, and if the side matche the player's side
 	if (typeOf _x == "GRRA_ModuleBaseArsenal") then {
-		if !([_x getVariable "Side"] call GRRA_fnc_sidesMatch) then {
-			continue
+		if ([_x getVariable "Side"] call GRRA_fnc_sidesMatch) then {
+			[_x] call _fnc_createOrAddArsenal;
+			continue;
 		};
-		[_x] call _fnc_createOrAddArsenal;
 	};
 
 	// check if the module is a RoleRestrictedArsenal, and if the side and role match the player's side and role
 	if (typeOf _x == "GRRA_ModuleRoleRestrictedArsenal") then {
 
-		// Check if the player matches the SteamID whitelist - if so, add the arsenal automatically - this is good for admins or mission makers while testing
-		// Note: I've added a small change to the whitelist logic to ensure that users can still use roleDescription/side as limiting factors,
-		// but ultimately, "Player" (steamID) is still the most potent factor and will override all other factors. - Grom		
+		// Bail immediately if the side does not match
+		if (!([_x getVariable "Side"] call GRRA_fnc_sidesMatch) ) then {continue};
+
+		// Check if the player matches the SteamID whitelist - if so, add the arsenal automatically
 		if ([_x getVariable "Player"] call GRRA_fnc_playerUIDMatch) then {
+			systemChat format["Adding Arsenal for Player: %1", player];
+			[_x] call _fnc_createOrAddArsenal;
+			continue;
+		};		
+
+		// Check if the player matches the Role whitelist and the Side whitelist
+		if (_x getVariable "Role" in roleDescription player || _x getVariable "Group" in str group player) then {
+			systemChat format["Adding Arsenal for Role or group: '%1' or '%2'", _x getVariable "Role", _x getVariable "Group"];
 			[_x] call _fnc_createOrAddArsenal;
 			continue;
 		};
 
-		// Check if the player matches the Role whitelist and the Side whitelist
-		if (((_x getVariable "Role" in roleDescription player) || _x getVariable "Group" in str group player) && ([_x getVariable "Side"] call GRRA_fnc_sidesMatch)) then {
-			[_x] call _fnc_createOrAddArsenal;
-			continue;
-		};
 	};
 
 	// Check if the module is an AceArsenalOverride, and if so, set the global variable to true
 	if (typeOf _x == "GRRA_AceArsenalOverride") then {
 		GRRA_USE_VANILLA_ARSENAL = true;
 	};
-}
-forEach allMissionObjects "Logic";
+} forEach allMissionObjects "Logic";
 
 // Arsenals to be initialized on a className
 {
@@ -109,8 +114,7 @@ forEach allMissionObjects "Logic";
 		[],
 		true
 	] call CBA_fnc_addClassEventHandler;
-}
-forEach GRRA_CLASSES_MAP;
+} forEach GRRA_CLASSES_MAP;
 
 // Arsenals to be attached to a specific variable
 {
@@ -121,5 +125,4 @@ forEach GRRA_CLASSES_MAP;
 	} else {
 		[_arsenalBox, GRRA_VARS_MAP get _x, false] call ace_arsenal_fnc_initBox;
 	};
-}
-forEach GRRA_VARS_MAP;
+} forEach GRRA_VARS_MAP;
