@@ -1,4 +1,4 @@
 {
-    "ADDON_BUILDER_PATH": "",
-    "PRIVATE_KEY_PATH": ""
+    "ADDON_BUILDER_PATH": "/path/to/Arma 3 Tools/AddonBuilder/AddonBuilder[.exe]",
+    "PRIVATE_KEY_PATH": "/path/to/my.biprivatekey"
 }

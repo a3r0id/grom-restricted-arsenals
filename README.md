@@ -1,9 +1,9 @@
-# Grom Restricted Arsenals (Alpha)
+# Grom Restricted Arsenals (Beta)
  A useful Arma 3 mod that allows mission-makers to initialize an infinite amount of whitelisted arsenals, both ACE and vanilla, and restricted by player role and other attributes. 
 
- [View on Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2925570747)
+## View the mod on [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2925570747).
 
-![](https://steamuserimages-a.akamaihd.net/ugc/2013706124474735514/AF4EB4D2A638312DCAD98004F7BC15E969EDEAA0/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true)
+## See [Release Notes](./RELEASE.md) for the latest changes.
 
 ### __Modules__
 
@@ -65,22 +65,7 @@ Since we're parsing the file AS CODE, AND NOT A STRING, your file format should 
     "Item3"
 ]
 ```
-This is because we're using SQF's [compile](https://community.bistudio.com/wiki/compile) syntax to parse the file as code, and not using my proprietary parser to parse the file contents as a string.
-
---------
-
-### __Arsenal Formatter (3den editor plugin)[*old - just use ctl+c to copy the classname in the Ace Arsenal interface*]__
-Using the formatting tool, you can easily create your arsenals and export them in a format that can be pasted directly into the `Items` attribute field in 3den.
-
-- To open the formatting tool, simply open the 3den editor and navigate to the `Tools` tab then click `Arsenal Formatter`.
-
-- Keep in mind that the formatting tool is still in development and may improve in the future.
-
-- IMPORT option is not available in multiplayer scenarios as Bohemia Int. has disabled accessing the clipboard in multiplayer.
-
-- The formatting tool can also be opened in-game by locally calling `[] call GRRA_fnc_formatter;`.
-
-![](https://steamuserimages-a.akamaihd.net/ugc/2013706759567545713/45EAA2FA615EA58637D040CDF6EF54A7168F12B8/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=#000000&letterbox=false)
+This is because we're using SQF's [compile](https://community.bistudio.com/wiki/compile) syntax to parse the file as code.
 
 --------
 
@@ -103,12 +88,4 @@ Using the formatting tool, you can easily create your arsenals and export them i
 - __A:__ No, the mod only needs to be installed on the client but the key must be present in the server's keys directory.
 
 --------
-
-### __Todos__
-
-- Combine player's arsenals where both classname and variable name are used.
-
-- ~~Add button to open formatter in pause menu.~~
-
-- Add a feature that makes it easier to find compatible ammo for a specific weapon (similar to ace's single mag icon option).
 

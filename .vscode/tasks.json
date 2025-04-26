@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Grom Restricted Arsenals",
+            "type": "shell",
+            "command": "python",
+            "args": ["build.py"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                {
+                    "owner": "python",
+                    "fileLocation": ["relative", "${workspaceFolder}"],
+                    "pattern": [
+                        {
+                            "regexp": "^\\s*File \"(.*)\", line (\\d+), in (.*)$",
+                            "file": 1,
+                            "line": 2,
+                            "message": 3
+                        },
+                        {
+                            "regexp": "^\\s*(.*)$",
+                            "message": 1
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
