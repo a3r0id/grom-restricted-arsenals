@@ -28,37 +28,7 @@ class CfgPatches {
 	};
 };
 
-// Base Side Component Class
-class Side: Combo {
-	property = "<default>";
-	displayName = "Side";
-	tooltip = "<default>";
-	typeName = "NUMBER";
-	defaultValue = "0";
 
-	class Values {
-		class opt0 {
-			name = "ALL";
-			value = 0;
-		};
-		class opt1 {
-			name = "BLUFOR";
-			value = 1;
-		};
-		class opt2 {
-			name = "OPFOR";
-			value = 2;
-		};
-		class opt3 {
-			name = "INDEPENDENT";
-			value = 3;
-		};
-		class opt4 {
-			name = "CIVILIAN";
-			value = 4;
-		};
-	};
-};
 
 class CfgFactionClasses {
 	class NO_CATEGORY;
@@ -78,6 +48,37 @@ class CfgVehicles {
 			class CheckboxNumber;
 			class ModuleDescription;
 			class Units;
+			// Base Side Component Class
+			class Side : Combo {
+				property = "<default>";
+				displayName = "Side";
+				tooltip = "<default>";
+				typeName = "NUMBER";
+				defaultValue = "0";
+	
+				class Values {
+					class opt0 {
+						name = "ALL";
+						value = 0;
+					};
+					class opt1 {
+						name = "BLUFOR";
+						value = 1;
+					};
+					class opt2 {
+						name = "OPFOR";
+						value = 2;
+					};
+					class opt3 {
+						name = "INDEPENDENT";
+						value = 3;
+					};
+					class opt4 {
+						name = "CIVILIAN";
+						value = 4;
+					};
+				};
+			};			
 		};
 
 		class ModuleDescription {
@@ -99,8 +100,7 @@ class CfgVehicles {
 		curatorInfoType = "";
 
 		class Attributes: AttributesBase {
-			
-			// Extend the base attributes
+
 			class Side: Side {
 				property = "GRRA_ModuleRoleRestrictedArsenal_Side"; // Unique property (use "<GRRA>_<moduleClass>_<attributeClass>" format to ensure that the name is unique)
 				tooltip = "Side that the base arsenal is for."; // Tooltip description
@@ -158,7 +158,6 @@ class CfgVehicles {
 
 		class Attributes: AttributesBase {
 
-			// fart
 			class Side: Side {
 				property = "GRRA_ModuleBaseArsenal_Side";
 				tooltip = "Side that can use the arsenal.";

@@ -19,7 +19,7 @@ _fnc_createOrAddArsenal = {
 	params["_logicModule"];
 	private["_classNameOrVariable", "_globalVariable", "_gVarCopy"];
 
-	systemChat format["Adding Arsenal: %1", _logicModule];
+	//systemchat format["Adding Arsenal: %1", _logicModule];
 
 	// Get the $Items variable from the logic object
 	private _items = _logicModule getVariable["Items", []];
@@ -59,6 +59,21 @@ _fnc_createOrAddArsenal = {
 	missionNamespace setVariable[_globalVariable, _gVarCopy];
 };
 
+_fnc_falseyDefaultString = {
+	params["_string"];
+	if (isNil "_string") exitWith {""};
+	_string
+};
+
+_fnc_falseyStrContains = {
+	params["_string", "_substring"];
+	_string = [_string] call _fnc_falseyDefaultString;
+	_substring = [_substring] call _fnc_falseyDefaultString;
+	// empty string should be considered a match
+	if (_string isEqualTo "") exitWith {true};
+	_substring in _string || _substring isEqualTo _string // Not sure if the second condition is needed, but it ensures that if the substring is exactly the same as the string, it returns true
+};
+
 {
 	// check if the module is a BaseArsenal, and if the side matche the player's side
 	if (typeOf _x == "GRRA_ModuleBaseArsenal") then {
@@ -76,14 +91,27 @@ _fnc_createOrAddArsenal = {
 
 		// Check if the player matches the SteamID whitelist - if so, add the arsenal automatically
 		if ([_x getVariable "Player"] call GRRA_fnc_playerUIDMatch) then {
-			systemChat format["Adding Arsenal for Player: %1", player];
+			//systemchat format["Adding Arsenal for Player: %1", player];
 			[_x] call _fnc_createOrAddArsenal;
 			continue;
-		};		
+		};
 
-		// Check if the player matches the Role whitelist and the Side whitelist
-		if (_x getVariable "Role" in roleDescription player || _x getVariable "Group" in str group player) then {
-			systemChat format["Adding Arsenal for Role or group: '%1' or '%2'", _x getVariable "Role", _x getVariable "Group"];
+		private _matchesRole = [_x getVariable "Role", roleDescription player] call _fnc_falseyStrContains;
+		private _matchesGroup = [_x getVariable "Group", str group player] call _fnc_falseyStrContains;	
+
+		// this might be a breaking change, but essentially, if role or group is not defined, we allow it through the whitelist check
+
+		if (_matchesRole) then {
+			//systemchat format["Adding Arsenal for Role: '%1'", _x getVariable "Role"];
+		};
+
+		if (_matchesGroup) then {
+			//systemchat format["Adding Arsenal for Group: '%1'", _x getVariable "Group"];
+		};
+
+		// Check if the player matches the Role whitelist or the Group whitelist
+		if (_matchesGroup && _matchesRole) then {
+			//systemchat format["Adding Arsenal for Role or group: '%1' or '%2'", _x getVariable "Role", _x getVariable "Group"];
 			[_x] call _fnc_createOrAddArsenal;
 			continue;
 		};
@@ -94,6 +122,7 @@ _fnc_createOrAddArsenal = {
 	if (typeOf _x == "GRRA_AceArsenalOverride") then {
 		GRRA_USE_VANILLA_ARSENAL = true;
 	};
+
 } forEach allMissionObjects "Logic";
 
 // Arsenals to be initialized on a className

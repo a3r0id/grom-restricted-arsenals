@@ -1,5 +1,7 @@
 # 0.2.2 Release Notes:
 
+- Whitelist changes: Substring filter attributes (Role/Group) that are empty will be treated as a match.
+
 - Config cleanup.
 
 - Added reusable Side-select component for the filter menu.
