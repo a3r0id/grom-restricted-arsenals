@@ -24,6 +24,6 @@
 
 - Cleaned up some of the documentation.
 
-- Removed the fallback for CBA role descriptions - Now it will check for a substring, so nothing has changed in functionality unless you are using CBA role descriptions.
-In that case, you will can now filter by something like "Medic@Tombstone" instead of just "Medic" but can just also use "Medic" as well.
+- ~~Removed the fallback for CBA role descriptions - Now it will check for a substring, so nothing has changed in functionality unless you are using CBA role descriptions.
+In that case, you will can now filter by something like "Medic@Tombstone" instead of just "Medic" but can just also use "Medic" as well.~~
 
