@@ -1,3 +1,9 @@
+# 0.2.3 Patch Notes:
+
+- Restores previous functionality of the "Role" filter, which was broken for "@" roles in 0.2.2.
+
+- Some minor code cleanup and simplification.
+
 # 0.2.2 Release Notes:
 
 - Whitelist changes: Substring filter attributes (Role/Group) that are empty will be treated as a match.

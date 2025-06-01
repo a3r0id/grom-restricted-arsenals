@@ -59,24 +59,12 @@ _fnc_createOrAddArsenal = {
 	missionNamespace setVariable[_globalVariable, _gVarCopy];
 };
 
-_fnc_falseyDefaultString = {
-	params["_string"];
-	if (isNil "_string") exitWith {""};
-	_string
-};
-
-_fnc_falseyStrContains = {
-	params["_string", "_substring"];
-	_string = [_string] call _fnc_falseyDefaultString;
-	_substring = [_substring] call _fnc_falseyDefaultString;
-	// empty string should be considered a match
-	if (_string isEqualTo "") exitWith {true};
-	_substring in _string || _substring isEqualTo _string // Not sure if the second condition is needed, but it ensures that if the substring is exactly the same as the string, it returns true
-};
-
 {
 	// check if the module is a BaseArsenal, and if the side matche the player's side
 	if (typeOf _x == "GRRA_ModuleBaseArsenal") then {
+		/*
+		GRRA_ModuleBaseArsenal has config: Side, Owner, Items
+		*/
 		if ([_x getVariable "Side"] call GRRA_fnc_sidesMatch) then {
 			[_x] call _fnc_createOrAddArsenal;
 			continue;
@@ -85,6 +73,9 @@ _fnc_falseyStrContains = {
 
 	// check if the module is a RoleRestrictedArsenal, and if the side and role match the player's side and role
 	if (typeOf _x == "GRRA_ModuleRoleRestrictedArsenal") then {
+		/*
+		GRRA_ModuleRoleRestrictedArsenal has config: Side, Role, Group, Player, Items
+		*/
 
 		// Bail immediately if the side does not match
 		if (!([_x getVariable "Side"] call GRRA_fnc_sidesMatch) ) then {continue};
@@ -96,22 +87,37 @@ _fnc_falseyStrContains = {
 			continue;
 		};
 
-		private _matchesRole = [_x getVariable "Role", roleDescription player] call _fnc_falseyStrContains;
-		private _matchesGroup = [_x getVariable "Group", str group player] call _fnc_falseyStrContains;	
+		// Going to expand the code here a bit for clarity and flexibility
 
-		// this might be a breaking change, but essentially, if role or group is not defined, we allow it through the whitelist check
+		private _playerRole = roleDescription player;
+		private _playerGroup = str group player;
 
-		if (_matchesRole) then {
-			//systemchat format["Adding Arsenal for Role: '%1'", _x getVariable "Role"];
+		private _whitelistedRole = _x getVariable "Role";
+
+		// Restores old behavior when handling CBA formatted roles (Magic delimeter '@')
+		// Actually, is this even a CBA thing or is it vanilla Arma 3? Idk lol
+		if ('@' in _playerRole) then {
+			private _strSplit = _playerRole splitString '@';
+			if (count _strSplit >= 2) then {
+				_playerRole = _strSplit#0;
+				_playerGroup = _strSplit#1;
+			};
 		};
 
-		if (_matchesGroup) then {
-			//systemchat format["Adding Arsenal for Group: '%1'", _x getVariable "Group"];
-		};
+		//systemChat format["Whitelisted Role: %1, Player Role: %2, Includes: %3", _whitelistedRole, _playerRole, _whitelistedRole in _playerRole];
+
+		private _whitelistedGroup = _x getVariable "Group";
+
+		//systemChat format["Whitelisted Group: %1, Player Group: %2, Includes: %3", _whitelistedGroup, _playerGroup, _whitelistedGroup in _playerGroup];
+
+		// Check if the player's role matches the whitelisted role (or if the whitelisted role is empty which means no restriction for this field)
+		private _matchesRole = count _whitelistedRole == 0 || _whitelistedRole in _playerRole;
+
+		// Check if the player's group matches the whitelisted group (or if the whitelisted group is empty which means no restriction for this field)
+		private _matchesGroup = count _whitelistedGroup == 0 || _whitelistedGroup in _playerGroup;
 
 		// Check if the player matches the Role whitelist or the Group whitelist
 		if (_matchesGroup && _matchesRole) then {
-			//systemchat format["Adding Arsenal for Role or group: '%1' or '%2'", _x getVariable "Role", _x getVariable "Group"];
 			[_x] call _fnc_createOrAddArsenal;
 			continue;
 		};
