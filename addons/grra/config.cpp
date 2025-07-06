@@ -3,11 +3,10 @@
 #define GRRA_MOD_LOGO grra\data\grra.paa
 #define GRRA_MOD_ICON grra\data\grra_icon.paa
 #define GRRA_MOD_AUTHOR Grom
-#define GRRA_MOD_NAME Grom Restricted Arsenals
 
 class CfgPatches {
 	class GRRA {
-		name = GRRA_MOD_NAME;
+		name = "Grom Restricted Arsenals";
 		author = GRRA_MOD_AUTHOR;
 		logo = GRRA_MOD_LOGO;
 		logoOver = GRRA_MOD_LOGO;
@@ -33,7 +32,7 @@ class CfgPatches {
 class CfgFactionClasses {
 	class NO_CATEGORY;
 	class GRRA_Modules: NO_CATEGORY {
-		displayName = GRRA_MOD_NAME;
+		displayName = "Grom Restricted Arsenals";
 	};
 };
 
