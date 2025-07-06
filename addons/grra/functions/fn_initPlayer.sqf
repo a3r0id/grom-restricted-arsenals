@@ -10,10 +10,10 @@ if (!hasInterface) exitWith {};
 GRRA_USE_VANILLA_ARSENAL = false;
 
 // hashmap of arsenal objects defined by classname
-GRRA_CLASSES_MAP = createhashmapfromarray[];
+GRRA_CLASSES_MAP = createHashMapFromArray[];
 
 // hashmap of arsenal objects defined by variable
-GRRA_VARS_MAP = createhashmapfromarray[];
+GRRA_VARS_MAP = createHashMapFromArray[];
 
 _fnc_createOrAddArsenal = {
 	params["_logicModule"];
