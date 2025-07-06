@@ -1,9 +1,7 @@
-from os import getcwd, mkdir
-from subprocess import run
-from os.path import join
+import os
 import json
 import shutil
-import glob
+from subprocess import run
 
 BUILD_CONFIG = "build.json"
 
@@ -15,40 +13,43 @@ def config():
     return Config(json.load(open(BUILD_CONFIG)))
 
 CONFIG          = config()
-BUILD_FOLDER    = join(getcwd(),"grra")
-ADDONS_FOLDER   = join(join(getcwd(),"Grom Restricted Arsenals"),"Addons")
-KEYS_FOLDER     = join(join(getcwd(),"Grom Restricted Arsenals"),"Keys")
+INPUT_ADDONS    = os.path.join(os.getcwd(),"addons")
+ADDONS_FOLDER   = os.path.join(os.path.join(os.getcwd(),"Grom Restricted Arsenals"),"Addons")
+KEYS_FOLDER     = os.path.join(os.path.join(os.getcwd(),"Grom Restricted Arsenals"),"Keys")
 
-# Clear/Build the temp structure
-print ("\r\n[+] Rebuilding BUILD_FOLDER folder...")
-mkdir(BUILD_FOLDER)
+addons_found = os.listdir(INPUT_ADDONS)
+if not addons_found:
+    print("[!] No addons found in the input directory. Please add addons to the 'addons' folder.")
+    exit(1)
 
-# Copy the project files
-print ("[+] Copying project to BUILD_FOLDER folder...")
-shutil.copytree(join(getcwd(),"functions"), join(BUILD_FOLDER,"functions"))
-shutil.copytree(join(getcwd(),"data"), join(BUILD_FOLDER,"data"))
-shutil.copy(join(getcwd(),"config.cpp"), BUILD_FOLDER)
-shutil.copy(join(getcwd(),"$PBOPREFIX$"), BUILD_FOLDER)
+print("[+] Found addons: " + str(addons_found))
 
-# all files that end with ".hpp"
-for file in glob.glob("*.hpp"):
-    shutil.copy(file, BUILD_FOLDER)
+for folder in addons_found:
 
-print ("[+] Copy completed!")
+    addon_path = os.path.join(INPUT_ADDONS, folder)
+    if not os.path.isdir(addon_path):
+        print (f"[!] Skipping {folder} as it is not a directory.")
+        continue
 
-print ("[+] [**Packing addon**]\n==========================================================================")
+    prefix = None
+    pbp_prefix_path = os.path.join(addon_path, "$PBOPREFIX$")
+    if not os.path.exists(pbp_prefix_path):
+        print (f"[!] Skipping {folder} as it does not contain a $PBOPREFIX$ file.")
+        continue
 
-# Pack the addon
-run([
-    CONFIG.ADDON_BUILDER_PATH,
-    BUILD_FOLDER,
-    ADDONS_FOLDER,
-    "-packonly",
-    "-prefix=GRRA",
-    "-sign=" + CONFIG.PRIVATE_KEY_PATH
-], check=True)
+    with open(pbp_prefix_path, "r") as f:
+        prefix = f.read().strip()
 
-# Clean up
-print ("==========================================================================\n[+] Cleaning up")
-shutil.rmtree(BUILD_FOLDER)
+    print (f"[+] [**Building addon: {addon_path} with prefix: {prefix}**]\n==========================================================================")
+
+    # Pack the addon
+    run([
+        CONFIG.ADDON_BUILDER_PATH,
+        addon_path,
+        ADDONS_FOLDER,
+        "-packonly",
+        "-prefix=" + prefix,
+        "-sign=" + CONFIG.PRIVATE_KEY_PATH
+    ], check=True)
+
 print ("[+] Done")
