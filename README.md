@@ -1,8 +1,9 @@
 # Grom Restricted Arsenals (Beta)
  A useful Arma 3 mod that allows mission-makers to initialize an infinite amount of whitelisted arsenals, both ACE and vanilla, and restricted by player role and other attributes. 
 
-### Development Status
+## Development Status
 [![Build](https://github.com/a3r0id/grom-restricted-arsenals/actions/workflows/main.yml/badge.svg)](https://github.com/a3r0id/grom-restricted-arsenals/actions/workflows/main.yml)
+
 See [Release Notes](./RELEASE.md) for the latest changes.
 
 ## View the mod on [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2925570747).
