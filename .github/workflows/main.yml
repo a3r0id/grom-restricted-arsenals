@@ -18,5 +18,4 @@ jobs:
               uses: actions/upload-artifact@v4
               with:
                   name: grra-release
-                  if-no-files-found: error
                   path: release/grra.zip
