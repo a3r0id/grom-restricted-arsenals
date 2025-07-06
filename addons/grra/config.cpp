@@ -15,7 +15,7 @@ class CfgPatches {
 			"GRRA_ModuleBaseArsenal",
 			"GRRA_AceArsenalOverride"
 		};
-		requiredVersion = 1.0;
+		requiredVersion = 2.02;
 		requiredAddons[] = {
 			"A3_Modules_F",
 			"3DEN"
