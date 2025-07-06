@@ -1,18 +1,14 @@
 #include "CfgFunctions.hpp"
-#define GRRA_MOD_DESCRIPTION 3 DEN module that allows creators to initialize an infinite amount of ACE arsenals restricted by player role and other attributes.
-#define GRRA_MOD_LOGO grra\data\grra.paa
-#define GRRA_MOD_ICON grra\data\grra_icon.paa
-#define GRRA_MOD_AUTHOR Grom
 
 class CfgPatches {
 	class GRRA {
 		name = "Grom Restricted Arsenals";
-		author = GRRA_MOD_AUTHOR;
-		logo = GRRA_MOD_LOGO;
-		logoOver = GRRA_MOD_LOGO;
-		tooltip = GRRA_MOD_DESCRIPTION;
-		tooltipOwned = GRRA_MOD_DESCRIPTION;
-		picture = GRRA_MOD_LOGO;
+		author = "Grom";
+		logo = "grra\data\grra.paa";
+		logoOver = "grra\data\grra.paa";
+		tooltip = "3DEN module that allows creators to initialize an infinite amount of ACE arsenals restricted by player role and other attributes.";
+		tooltipOwned = "3DEN module that allows creators to initialize an infinite amount of ACE arsenals restricted by player role and other attributes.";
+		picture = "grra\data\grra.paa";
 		url = "https://github.com/a3r0id";
 		units[] = {
 			"GRRA_ModuleRoleRestrictedArsenal",
@@ -26,8 +22,6 @@ class CfgPatches {
 		};
 	};
 };
-
-
 
 class CfgFactionClasses {
 	class NO_CATEGORY;
@@ -88,7 +82,7 @@ class CfgVehicles {
 	class GRRA_ModuleRoleRestrictedArsenal: Module_F {
 		scope = 2;
 		displayName = "Restricted Arsenal";
-		icon = GRRA_MOD_ICON;
+		icon = "grra\data\grra_icon.paa";
 		category = "GRRA_Modules";
 		function = "";
 		functionPriority = 1;
@@ -145,7 +139,7 @@ class CfgVehicles {
 	class GRRA_ModuleBaseArsenal: Module_F {
 		scope = 2;
 		displayName = "Base Arsenal";
-		icon = GRRA_MOD_ICON;
+		icon = "grra\data\grra_icon.paa";
 		category = "GRRA_Modules";
 		function = "";
 		functionPriority = 1;
@@ -181,7 +175,7 @@ class CfgVehicles {
 	class GRRA_AceArsenalOverride: Module_F {
 		scope = 2;
 		displayName = "Force Vanilla Arsenal";
-		icon = GRRA_MOD_ICON;
+		icon = "grra\data\grra_icon.paa";
 		category = "GRRA_Modules";
 		function = "";
 		functionPriority = 1;
