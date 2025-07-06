@@ -1,3 +1,13 @@
+# 0.2.5 Bulletin:
+
+- No functional changes to the mod itself so I'm not bumping the version or rolling a new release.
+
+- Major refactor in project structure and adds HEMTT build system to our workflows which.
+
+- Added back develop branch.
+
+- Enforcing best practices.
+
 # 0.2.3 Patch Notes:
 
 - Restores previous functionality of the "Role" filter, which was broken for "@" roles in 0.2.2.
