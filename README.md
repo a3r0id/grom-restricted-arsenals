@@ -3,7 +3,7 @@
  View/install the mod on [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2925570747).
 
 ## Development Status
-[![Build](https://github.com/a3r0id/grom-restricted-arsenals/actions/workflows/main.yml/badge.svg)](https://github.com/a3r0id/grom-restricted-arsenals/actions/workflows/main.yml) [![Develop Build](https://github.com/a3r0id/grom-restricted-arsenals/actions/workflows/develop.yml/badge.svg)](https://github.com/a3r0id/grom-restricted-arsenals/actions/workflows/develop.yml)
+[![Develop Build](https://github.com/a3r0id/grom-restricted-arsenals/actions/workflows/develop.yml/badge.svg)](https://github.com/a3r0id/grom-restricted-arsenals/actions/workflows/develop.yml) [![Build](https://github.com/a3r0id/grom-restricted-arsenals/actions/workflows/main.yml/badge.svg)](https://github.com/a3r0id/grom-restricted-arsenals/actions/workflows/main.yml)
 
 See [Release Notes](./RELEASE.md) for the latest changes.
 
