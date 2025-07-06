@@ -1,6 +1,5 @@
 import os
 import json
-import shutil
 from subprocess import run
 
 BUILD_CONFIG = "build.json"
