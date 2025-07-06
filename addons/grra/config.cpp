@@ -125,7 +125,7 @@ class CfgVehicles {
 				displayName = "Player";
 				tooltip = "Steam64ID of player that can use the arsenal. This will override the Role/Side attributes.";
 				defaultValue = """""";
-			}
+			};
 
 			class Items: Edit {
 				property = "GRRA_ModuleRoleRestrictedArsenal_Items";
@@ -154,7 +154,7 @@ class CfgVehicles {
 			class Side: Side {
 				property = "GRRA_ModuleBaseArsenal_Side";
 				tooltip = "Side that can use the arsenal.";
-			}
+			};
 
 			class Owner: Edit {
 				property = "GRRA_ModuleBaseArsenal_Owner";
