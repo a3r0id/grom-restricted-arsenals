@@ -9,6 +9,8 @@ See [Release Notes](./RELEASE.md) for the latest changes.
 
 ## How To Use The Mod
 
+### __Modules__
+
 To use a module, simply drop the module anywhere in your mission's map in 3den editor and double-click on it to configure. Modules can be found under the "Systems" category in 3den editor.
 
 ![](https://steamuserimages-a.akamaihd.net/ugc/2013706759566266819/D3728CD87EFA72EC6F1B99386BDA5C6C4D71B8B2/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=#000000&letterbox=false)
