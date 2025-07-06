@@ -2,7 +2,6 @@ name = "Grom Restricted Arsenals"
 prefix = "GRRA"
 
 [version]
-path = "addons/grra/script_version.hpp"
 major = 1
 minor = 0
 patch = 4
