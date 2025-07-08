@@ -1,4 +1,4 @@
-name: Develop Build
+name: Development Build
 
 on: 
     push:
